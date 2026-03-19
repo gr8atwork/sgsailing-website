@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>St George’s Sailing Club CIC</title>
+  <meta name="description" content="St George’s Sailing Club CIC – Sunday sailing at Bury Lake Young Mariners." />
+  <style>
+    :root { color-scheme: light; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height: 1.5; }
+    header { padding: 52px 16px; background: #0b2239; color: #fff; }
+    header .wrap { max-width: 900px; margin: 0 auto; }
+    h1 { margin: 0 0 10px; font-size: 2rem; }
+    p { margin: 0 0 12px; }
+    .cta { display: inline-block; margin-top: 12px; padding: 10px 14px; background: #fff; color: #0b2239; text-decoration: none; border-radius: 8px; font-weight: 700; }
+    main { padding: 24px 16px; }
+    .wrap { max-width: 900px; margin: 0 auto; }
+    .grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; background: #fff; }
+    .label { font-weight: 800; margin-bottom: 8px; }
+    footer { padding: 16px; border-top: 1px solid #e5e7eb; color: #444; }
+    .small { font-size: 0.92rem; }
+    code { background: #f3f4f6; padding: 2px 6px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>St George’s Sailing Club CIC</h1>
+      <p>Test site – hosted on Azure Static Web Apps</p>
+      <p class="small">If you can see this at <code>sgsailing.org.uk</code>, your custom domain setup is working.</p>
+      <a class="cta" href="mailto:contact@sgsailing.org.uk">Email: contact@sgsailing.org.uk</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="grid">
+        <section class="card">
+          <div class="label">When</div>
+          <p>Sundays during the sailing season.</p>
+          <p class="small">(Replace with your real dates/times later.)</p>
+        </section>
+
+        <section class="card">
+          <div class="label">Where</div>
+          <p>Bury Lake Young Mariners (BLYM), Hertfordshire.</p>
+          <p class="small">(Add directions / map link later.)</p>
+        </section>
+
+        <section class="card">
+          <div class="label">About the CIC</div>
+          <p>
+            St George’s Sailing Club operates as a Community Interest Company (CIC),
+            supporting sailing opportunities for St George’s students.
+          </p>
+        </section>
+
+        <section class="card">
+          <div class="label">Deployment check</div>
+          <p class="small">
+            Page loaded at: <span id="ts"></span><br />
+            If this timestamp updates after you push to GitHub, auto-deploy is working.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap small">
+      © <span id="yr"></span> St George’s Sailing Club CIC ·
+      <a href="mailto:contact@sgsailing.org.uk">contact@sgsailing.org.uk</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("yr").textContent = new Date().getFullYear();
+    document.getElementById("ts").textContent = new Date().toLocaleString();
+  </script>
+</body>
+</html>
