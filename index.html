@@ -1,83 +1,624 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>St George’s Sailing Club CIC</title>
-  <meta name="description" content="St George’s Sailing Club CIC – Sunday sailing at Bury Lake Young Mariners." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>St Georges Sailing Club | www.sgsailing.org.uk</title>
+  <meta name="description" content="St Georges Sailing Club is a parents-run sailing club operating through St Georges Sailing Club Community Interest Company, sailing at Bury Lake Young Mariners." />
   <style>
-    :root { color-scheme: light; }
-    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height: 1.5; }
-    header { padding: 52px 16px; background: #0b2239; color: #fff; }
-    header .wrap { max-width: 900px; margin: 0 auto; }
-    h1 { margin: 0 0 10px; font-size: 2rem; }
-    p { margin: 0 0 12px; }
-    .cta { display: inline-block; margin-top: 12px; padding: 10px 14px; background: #fff; color: #0b2239; text-decoration: none; border-radius: 8px; font-weight: 700; }
-    main { padding: 24px 16px; }
-    .wrap { max-width: 900px; margin: 0 auto; }
-    .grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
-    @media (min-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } }
-    .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; background: #fff; }
-    .label { font-weight: 800; margin-bottom: 8px; }
-    footer { padding: 16px; border-top: 1px solid #e5e7eb; color: #444; }
-    .small { font-size: 0.92rem; }
-    code { background: #f3f4f6; padding: 2px 6px; border-radius: 6px; }
+    :root {
+      --navy: #0f2742;
+      --blue: #1c5d99;
+      --sky: #d9ecff;
+      --sand: #f7f8fa;
+      --white: #ffffff;
+      --text: #1d2a33;
+      --muted: #5b6975;
+      --line: #d7dee6;
+      --accent: #2a9d8f;
+      --shadow: 0 12px 30px rgba(15, 39, 66, 0.12);
+      --radius: 20px;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--sand);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(247, 248, 250, 0.9);
+      border-bottom: 1px solid rgba(215, 222, 230, 0.8);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.95rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: 0.01em;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: var(--white);
+      font-size: 1.1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .brand-text small {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-weight: 600;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(42, 157, 143, 0.18), transparent 32%),
+        linear-gradient(180deg, #f8fbff 0%, #eef5fc 100%);
+      padding: 4.8rem 0 4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(28, 93, 153, 0.12);
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin: 0 0 1rem;
+      font-size: clamp(2.25rem, 5vw, 4.2rem);
+      line-height: 1.05;
+      color: var(--navy);
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 62ch;
+      margin: 0 0 1.5rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.9rem 1.15rem;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      text-decoration: none;
+      box-shadow: var(--shadow);
+    }
+
+    .button-primary {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .button-secondary {
+      background: var(--white);
+      color: var(--navy);
+      border-color: var(--line);
+    }
+
+    .hero-card {
+      background: var(--white);
+      border: 1px solid rgba(215, 222, 230, 0.85);
+      border-radius: 28px;
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h2 {
+      margin: 0 0 0.7rem;
+      font-size: 1.15rem;
+      color: var(--navy);
+    }
+
+    .hero-card ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: var(--muted);
+    }
+
+    .hero-card li + li {
+      margin-top: 0.45rem;
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      margin: 0 0 0.75rem;
+      font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+      line-height: 1.1;
+      color: var(--navy);
+      letter-spacing: -0.03em;
+    }
+
+    .section-lead {
+      margin: 0 0 2rem;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      box-shadow: 0 8px 22px rgba(15, 39, 66, 0.06);
+    }
+
+    .card h3 {
+      margin: 0 0 0.55rem;
+      color: var(--navy);
+      font-size: 1.12rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 22px rgba(15, 39, 66, 0.06);
+    }
+
+    .panel h3 {
+      margin-top: 0;
+      color: var(--navy);
+    }
+
+    .panel ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: var(--muted);
+    }
+
+    .panel li + li {
+      margin-top: 0.45rem;
+    }
+
+    .notice {
+      background: linear-gradient(135deg, rgba(28, 93, 153, 0.08), rgba(42, 157, 143, 0.08));
+    }
+
+    .cta {
+      padding-bottom: 5rem;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, var(--navy), #163a62 65%, #1d5d73 100%);
+      color: var(--white);
+      padding: 2rem;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .cta-box h2 {
+      margin: 0 0 0.7rem;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      line-height: 1.1;
+    }
+
+    .cta-box p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.84);
+    }
+
+    .contact-panel {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 20px;
+      padding: 1.2rem;
+    }
+
+    .contact-panel strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .contact-help {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 0.7rem;
+    }
+
+    #email-wrap {
+      margin-top: 0.8rem;
+      min-height: 2.6rem;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .email-link {
+      color: var(--white);
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .site-footer {
+      background: #0d2036;
+      color: rgba(255, 255, 255, 0.78);
+      padding: 1.35rem 0;
+      font-size: 0.95rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-inner a {
+      color: #d9ecff;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .split,
+      .cta-box,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      nav ul {
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav ul {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 3.5rem;
+      }
+
+      section {
+        padding: 3.2rem 0;
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <h1>St George’s Sailing Club CIC</h1>
-      <p>Test site – hosted on Azure Static Web Apps</p>
-      <p class="small">If you can see this at <code>sgsailing.org.uk</code>, your custom domain setup is working.</p>
-      <a class="cta" href="mailto:contact@sgsailing.org.uk">Email: contact@sgsailing.org.uk</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="St Georges Sailing Club home">
+        <span class="brand-mark" aria-hidden="true">⛵</span>
+        <span class="brand-text">
+          <span>St Georges Sailing Club</span>
+          <small>Parents-run sailing at Bury Lake Young Mariners</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#sailing">Sailing</a></li>
+          <li><a href="#helpers">Parent Helpers</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <main>
-    <div class="wrap">
-      <div class="grid">
-        <section class="card">
-          <div class="label">When</div>
-          <p>Sundays during the sailing season.</p>
-          <p class="small">(Replace with your real dates/times later.)</p>
-        </section>
-
-        <section class="card">
-          <div class="label">Where</div>
-          <p>Bury Lake Young Mariners (BLYM), Hertfordshire.</p>
-          <p class="small">(Add directions / map link later.)</p>
-        </section>
-
-        <section class="card">
-          <div class="label">About the CIC</div>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">St Georges Sailing Club CIC</span>
+          <h1>Junior sailing with a strong community spirit.</h1>
           <p>
-            St George’s Sailing Club operates as a Community Interest Company (CIC),
-            supporting sailing opportunities for St George’s students.
+            St Georges Sailing Club offers a welcoming way for young people and families connected to St George’s to enjoy sailing together.
+            We operate through <strong>St Georges Sailing Club Community Interest Company</strong> and sail at <strong>Bury Lake Young Mariners</strong> in Rickmansworth.
           </p>
-        </section>
+          <div class="actions">
+            <a class="button button-primary" href="#contact">Register your interest</a>
+            <a class="button button-secondary" href="#sailing">How it works</a>
+          </div>
+        </div>
 
-        <section class="card">
-          <div class="label">Deployment check</div>
-          <p class="small">
-            Page loaded at: <span id="ts"></span><br />
-            If this timestamp updates after you push to GitHub, auto-deploy is working.
-          </p>
-        </section>
+        <aside class="hero-card" aria-label="At a glance">
+          <h2>At a glance</h2>
+          <ul>
+            <li>Friendly, parents-run sailing community.</li>
+            <li>Sessions typically take place on Sundays during the sailing season.</li>
+            <li>Based at Bury Lake Young Mariners.</li>
+            <li>Parent helpers are warmly encouraged to get involved.</li>
+          </ul>
+        </aside>
       </div>
-    </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">A club built around young sailors, families and confidence on the water.</h2>
+        <p class="section-lead">
+          We aim to create an enjoyable environment where pupils can develop sailing skills, spend time outdoors and build independence,
+          teamwork and resilience. The club has grown out of a long-standing school sailing community and now operates as its own CIC.
+        </p>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Community-led</h3>
+            <p>Our sessions are supported by parents and volunteers who help the club run smoothly and keep the atmosphere friendly and inclusive.</p>
+          </article>
+          <article class="card">
+            <h3>Practical learning</h3>
+            <p>Young sailors learn by doing, building confidence on the water through regular participation and shared experience.</p>
+          </article>
+          <article class="card">
+            <h3>Outdoor adventure</h3>
+            <p>Sailing offers fresh air, responsibility, teamwork and fun, all in a setting that encourages steady growth and enjoyment.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sailing" class="notice">
+      <div class="container">
+        <h2 class="section-title">How sailing sessions work</h2>
+        <p class="section-lead">
+          We sail from Bury Lake Young Mariners and organise sessions as a parents-run club. Families who are interested can get in touch to find out more about membership,
+          communication arrangements and how the season is managed.
+        </p>
+
+        <div class="split">
+          <div class="panel">
+            <h3>What to expect</h3>
+            <ul>
+              <li>A welcoming club environment for young sailors and supporting families.</li>
+              <li>Sunday sailing through the season, subject to conditions and club arrangements.</li>
+              <li>Clear communications for members about sessions and logistics.</li>
+              <li>A focus on safe, enjoyable participation and progressive confidence-building.</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3>Club administration</h3>
+            <ul>
+              <li>The club operates through <strong>St Georges Sailing Club Community Interest Company</strong>.</li>
+              <li>Member communications and club administration are managed digitally.</li>
+              <li>Details for joining and seasonal updates are shared directly with interested families.</li>
+              <li>Please contact us for the latest information on the current season.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="helpers">
+      <div class="container">
+        <h2 class="section-title">Parent helpers are very welcome.</h2>
+        <p class="section-lead">
+          The club depends on the energy and goodwill of parents. Whether you can help regularly or only occasionally, practical support makes a real difference.
+        </p>
+
+        <div class="split">
+          <div class="panel">
+            <h3>Ways to help</h3>
+            <ul>
+              <li>Supporting session organisation on the day.</li>
+              <li>Helping younger sailors feel settled and confident.</li>
+              <li>Assisting with communications and club administration.</li>
+              <li>Contributing to the friendly, community-led spirit of the club.</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3>Interested in getting involved?</h3>
+            <p>
+              Even a small amount of help can be valuable. If you would like to support the club as a parent helper, please get in touch and we will explain where help is most useful.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <h2>Interested in sailing with us?</h2>
+            <p>
+              To express interest in St Georges Sailing Club, or to ask about membership, sailing sessions or parent volunteering,
+              please use the contact button. The email address is revealed in your browser rather than printed directly on the page,
+              which offers some protection against basic automated scraping.
+            </p>
+          </div>
+
+          <div class="contact-panel">
+            <strong>Contact the club</strong>
+            <button class="button button-secondary" id="reveal-email" type="button">
+              Show contact email
+            </button>
+            <div id="email-wrap" aria-live="polite"></div>
+            <p class="contact-help">You can then click to open your email app or copy the address.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <div class="wrap small">
-      © <span id="yr"></span> St George’s Sailing Club CIC ·
-      <a href="mailto:contact@sgsailing.org.uk">contact@sgsailing.org.uk</a>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> St Georges Sailing Club Community Interest Company</div>
+      <div><a href="#top">Back to top</a></div>
     </div>
   </footer>
 
   <script>
-    document.getElementById("yr").textContent = new Date().getFullYear();
-    document.getElementById("ts").textContent = new Date().toLocaleString();
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const revealButton = document.getElementById('reveal-email');
+    const emailWrap = document.getElementById('email-wrap');
+
+    revealButton.addEventListener('click', () => {
+      const user = ['contact'].join('');
+      const domain = ['sgsailing', 'org', 'uk'].join('.');
+      const email = `${user}@${domain}`;
+
+      emailWrap.innerHTML = `
+        <a class="email-link" href="mailto:${email}">${email}</a>
+        <button class="button button-secondary" type="button" id="copy-email">Copy</button>
+        <span class="sr-only" id="copy-status" aria-live="polite"></span>
+      `;
+
+      revealButton.disabled = true;
+      revealButton.textContent = 'Email revealed';
+
+      const copyButton = document.getElementById('copy-email');
+      const copyStatus = document.getElementById('copy-status');
+
+      copyButton.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(email);
+          copyButton.textContent = 'Copied';
+          copyStatus.textContent = 'Email address copied to clipboard';
+        } catch (error) {
+          copyButton.textContent = 'Copy failed';
+          copyStatus.textContent = 'Copy failed';
+        }
+      }, { once: true });
+    }, { once: true });
   </script>
 </body>
 </html>
