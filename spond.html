@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Communications | St George's Sailing Club CIC</title>
+  <meta name="description" content="How St George's Sailing Club CIC communicates with parents and guardians using Spond and Facebook." />
+  <style>
+    :root {
+      --navy: #081f3f;
+      --navy-soft: #0f2b57;
+      --blue: #2b67a7;
+      --sky: #dfeeff;
+      --red: #c62828;
+      --paper: #f6f8fb;
+      --white: #ffffff;
+      --text: #1a2633;
+      --muted: #5f6d7b;
+      --line: rgba(8, 31, 63, 0.12);
+      --shadow: 0 18px 48px rgba(8, 31, 63, 0.16);
+      --radius-lg: 30px;
+      --radius-md: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(223, 238, 255, 0.9), transparent 26%),
+        linear-gradient(180deg, #f7fbff 0%, #f3f6fa 100%);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: absolute;
+      inset: 0 0 auto 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.95rem;
+      color: var(--white);
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-badge {
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.24);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.16);
+      flex: 0 0 auto;
+    }
+
+    .brand-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand small {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: rgba(255,255,255,0.92);
+      font-weight: 650;
+    }
+
+    .nav a {
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav a:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 72vh;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(5, 15, 31, 0.2) 0%, rgba(5, 15, 31, 0.5) 48%, rgba(5, 15, 31, 0.84) 100%),
+        url("images/fleet.webp");
+      background-size: cover;
+      background-position: center center;
+      color: var(--white);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 160px;
+      background: linear-gradient(180deg, rgba(243,246,250,0), rgba(243,246,250,1));
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 8rem 0 4.5rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.16);
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 11ch;
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      text-wrap: balance;
+    }
+
+    .hero-copy {
+      margin-top: 1.2rem;
+      max-width: 58ch;
+      font-size: 1.12rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .hero-actions {
+      margin-top: 1.7rem;
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.85rem 1.1rem;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+    }
+
+    .button-primary {
+      background: var(--white);
+      color: var(--navy);
+    }
+
+    .button-secondary {
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      border-color: rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-panel {
+      margin-top: 2rem;
+      width: min(100%, 620px);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+    }
+
+    .hero-panel strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .hero-panel p {
+      margin: 0;
+      color: rgba(255,255,255,0.84);
+      font-size: 0.98rem;
+    }
+
+    .strip {
+      position: relative;
+      z-index: 2;
+      margin-top: -2rem;
+    }
+
+    .strip-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .strip-card {
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 24px;
+      padding: 1.15rem 1.2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .strip-card strong {
+      display: block;
+      color: var(--navy);
+      font-size: 0.98rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .strip-card span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-kicker {
+      color: var(--red);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.82rem;
+      margin-bottom: 0.9rem;
+    }
+
+    h2 {
+      margin: 0 0 0.7rem;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.02;
+      color: var(--navy);
+      letter-spacing: -0.05em;
+      text-wrap: balance;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 62ch;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 1.6rem;
+    }
+
+    .card h3 {
+      margin: 0 0 0.75rem;
+      color: var(--navy);
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+    }
+
+    .card p:last-child { margin-bottom: 0; }
+
+    .steps {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .step {
+      background: var(--paper);
+      border: 1px solid rgba(8,31,63,0.06);
+      border-radius: 18px;
+      padding: 1rem;
+    }
+
+    .step strong {
+      display: block;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+
+    .link-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .link-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      background: var(--navy);
+      color: var(--white);
+      font-weight: 700;
+      word-break: break-all;
+    }
+
+    .note {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+
+    .bullet-list {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+    }
+
+    .bullet-list li + li { margin-top: 0.55rem; }
+
+    .side-image {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .side-image img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+    }
+
+    .side-image .caption {
+      padding: 1rem 1.2rem 1.2rem;
+      color: var(--muted);
+    }
+
+    .cta {
+      background:
+        linear-gradient(135deg, rgba(8,31,63,0.96), rgba(15,43,87,0.96)),
+        url("images/hero.webp");
+      background-size: cover;
+      background-position: center;
+      color: var(--white);
+      border-radius: 34px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-inner {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1rem;
+      padding: 2rem;
+    }
+
+    .cta h2 { color: var(--white); }
+    .cta p { color: rgba(255,255,255,0.86); }
+
+    .quote {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 24px;
+      padding: 1.25rem;
+      backdrop-filter: blur(10px);
+      align-self: center;
+    }
+
+    .site-footer {
+      padding: 1.6rem 0 2.4rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+      padding-top: 1.4rem;
+    }
+
+    @media (max-width: 980px) {
+      .strip-grid,
+      .section-head,
+      .content-grid,
+      .cta-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .site-header {
+        position: relative;
+        background: var(--navy);
+      }
+
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav { gap: 0.5rem; }
+      .hero { min-height: auto; }
+      .hero-inner { padding-top: 2.2rem; }
+      .strip { margin-top: 1.2rem; }
+      section { padding: 3.8rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="St George's Sailing Club CIC home">
+        <span class="brand-badge"><img src="images/crest.webp" alt="St George's Sailing Club crest" /></span>
+        <span>
+          St George's Sailing Club CIC
+          <small>Sailing at Bury Lake Young Mariners</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-inner">
+        <span class="eyebrow">Club communications</span>
+        <h1>How we keep in touch.</h1>
+        <p class="hero-copy">
+          We use Spond as our main club communication platform for weekly sailing updates, session sign-up and practical club information for parents and guardians.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#spond">Join on Spond</a>
+          <a class="button button-secondary" href="index.html">Back to homepage</a>
+        </div>
+        <div class="hero-panel">
+          <strong>Important</strong>
+          <p>Club communication is with parents and guardians rather than directly with students.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="strip">
+      <div class="container strip-grid">
+        <div class="strip-card">
+          <strong>Main platform</strong>
+          <span>Spond for weekly communication and sign-up</span>
+        </div>
+        <div class="strip-card">
+          <strong>Who receives updates</strong>
+          <span>Parents and guardians</span>
+        </div>
+        <div class="strip-card">
+          <strong>Extra updates</strong>
+          <span>Occasional Facebook posts</span>
+        </div>
+        <div class="strip-card">
+          <strong>Travel arrangements</strong>
+          <span>Parent to parent, not managed by the CIC</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="spond">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Spond</div>
+            <h2>Our main communication app for weekly sailing.</h2>
+          </div>
+          <p class="lead">
+            We use Spond as our main club communication platform for weekly sailing updates and session sign-up. It is the best place to receive notices, respond to events and stay up to date with the latest club information.
+          </p>
+        </div>
+
+        <div class="content-grid">
+          <div class="card">
+            <h3>Join the group</h3>
+            <p>To join the St George's Sailing Club group, please use this link:</p>
+            <div class="link-box">
+              <a class="link-pill" href="https://spond.com/client/groups/39D13A4C6F1649AA8697A44A9021026D" target="_blank" rel="noopener noreferrer">Join St George's Sailing Club on Spond</a>
+            </div>
+            <p>We recommend installing the <strong>Spond app</strong> so that notifications and weekly sailing updates are easier to receive and manage.</p>
+            <p>Once you have joined, our <strong>Membership Secretary</strong> will be in touch, answer any questions, and share the consent forms needed before sailing can begin.</p>
+
+            <div class="steps">
+              <div class="step">
+                <strong>For student sailors</strong>
+                Each week, parents or guardians will receive a Spond invitation for student sailors attending the next session.
+              </div>
+              <div class="step">
+                <strong>For adult helpers</strong>
+                Parents or guardians will also see a separate sign-up for adult helpers, so support can be planned clearly.
+              </div>
+              <div class="step">
+                <strong>For updates</strong>
+                Spond is our main channel for sailing weekend communication, practical updates and any changes affecting the session.
+              </div>
+            </div>
+          </div>
+
+          <div class="card side-image">
+            <img src="images/hero.webp" alt="Young sailors racing dinghies around a buoy" />
+            <div class="caption">Spond helps families stay connected to weekly sailing, sign-up and practical session information.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="facebook">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Facebook</div>
+            <h2>Occasional updates beyond Spond.</h2>
+          </div>
+          <p class="lead">
+            In addition to Spond, we also post occasional updates on our Facebook page. This is a useful extra channel for general club news and shared moments from club life.
+          </p>
+        </div>
+
+        <div class="content-grid">
+          <div class="card note">
+            <h3>Find us on Facebook</h3>
+            <p><strong>St Georges School Sailing Club</strong></p>
+            <div class="link-box">
+              <a class="link-pill" href="https://www.facebook.com/groups/2708423926110546" target="_blank" rel="noopener noreferrer">Visit the Facebook group</a>
+            </div>
+            <p>Facebook is not our primary operational channel, but it is a helpful place for occasional updates and broader club visibility.</p>
+          </div>
+
+          <div class="card">
+            <h3>What to use each channel for</h3>
+            <ul class="bullet-list">
+              <li><strong>Spond:</strong> weekly sign-up, practical sailing information, session notices and parent communication.</li>
+              <li><strong>Facebook:</strong> occasional club updates and general community posts.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="travel">
+      <div class="container">
+        <div class="cta">
+          <div class="cta-inner">
+            <div>
+              <div class="section-kicker" style="color:#fff; opacity:0.85;">Travel and logistics</div>
+              <h2>Car sharing is arranged parent to parent.</h2>
+              <p>
+                Parents may also use Spond to arrange car sharing between themselves. These arrangements are made <strong>parent to parent</strong> and are <strong>not organised or supervised by St George's Sailing Club CIC</strong>.
+              </p>
+              <p>
+                The CIC does not provide transport and is not involved in private lift-sharing arrangements between families.
+              </p>
+            </div>
+
+            <div class="quote">
+              <strong>Useful reminder</strong>
+              We recommend that families treat transport arrangements as private matters between parents and make their own decisions accordingly.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> St George's Sailing Club Community Interest Company</div>
+      <div>Sailing at Bury Lake Young Mariners</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
