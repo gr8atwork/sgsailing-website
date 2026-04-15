@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>St George's Sailing Club CIC</title>
+  <link rel="icon" type="image/png" sizes="48x48" href="images/favicon.png">
+  <meta name="description" content="A welcoming, not-for-profit sailing community primarily for St George's School pupils, sailing at Bury Lake Young Mariners." />
+  <style>
+    :root {
+      --navy: #081f3f;
+      --navy-soft: #0f2b57;
+      --blue: #2b67a7;
+      --sky: #dfeeff;
+      --red: #c62828;
+      --gold: #d9b35f;
+      --paper: #f6f8fb;
+      --white: #ffffff;
+      --text: #1a2633;
+      --muted: #5f6d7b;
+      --line: rgba(8, 31, 63, 0.12);
+      --shadow: 0 18px 48px rgba(8, 31, 63, 0.16);
+      --radius-lg: 30px;
+      --radius-md: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(223, 238, 255, 0.9), transparent 26%),
+        linear-gradient(180deg, #f7fbff 0%, #f3f6fa 100%);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: absolute;
+      inset: 0 0 auto 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.95rem;
+      color: var(--white);
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-badge {
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.24);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.16);
+      flex: 0 0 auto;
+    }
+
+    .brand-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand small {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: rgba(255,255,255,0.92);
+      font-weight: 650;
+    }
+
+    .nav a {
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav a:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(5, 15, 31, 0.18) 0%, rgba(5, 15, 31, 0.46) 48%, rgba(5, 15, 31, 0.82) 100%),
+        url("images/hero.webp");
+      background-size: cover;
+      background-position: center center;
+      color: var(--white);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 180px;
+      background: linear-gradient(180deg, rgba(243,246,250,0), rgba(243,246,250,1));
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 8rem 0 5rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.16);
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 12ch;
+      font-size: clamp(2.9rem, 6vw, 5.7rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      text-wrap: balance;
+    }
+
+    .hero-copy {
+      margin-top: 1.2rem;
+      max-width: 60ch;
+      font-size: 1.12rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .hero-actions {
+      margin-top: 1.7rem;
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.85rem 1.1rem;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+    }
+
+    .button-primary {
+      background: var(--white);
+      color: var(--navy);
+    }
+
+    .button-secondary {
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      border-color: rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+    }
+
+    .button-secondary-dark {
+      background: var(--paper);
+      color: var(--navy);
+      border: 1px solid rgba(8,31,63,0.12);
+    }
+
+    .hero-panel {
+      margin-top: 2rem;
+      width: min(100%, 560px);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+    }
+
+    .hero-panel strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .hero-panel p {
+      margin: 0;
+      color: rgba(255,255,255,0.84);
+      font-size: 0.98rem;
+    }
+
+    .strip {
+      position: relative;
+      z-index: 2;
+      margin-top: -2rem;
+    }
+
+    .strip-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .strip-card {
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 24px;
+      padding: 1.15rem 1.2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .strip-card strong {
+      display: block;
+      color: var(--navy);
+      font-size: 0.98rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .strip-card span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-kicker {
+      color: var(--red);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.82rem;
+      margin-bottom: 0.9rem;
+    }
+
+    h2 {
+      margin: 0 0 0.7rem;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.02;
+      color: var(--navy);
+      letter-spacing: -0.05em;
+      text-wrap: balance;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 62ch;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 1.4rem;
+      align-items: stretch;
+    }
+
+    .crest-card,
+    .story-card,
+    .gallery-card,
+    .info-card,
+    .contact-box {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .crest-card {
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(180deg, #ffffff 0%, #f6f9fd 100%);
+    }
+
+    .crest-card img {
+      width: min(100%, 300px);
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      filter: drop-shadow(0 14px 30px rgba(8,31,63,0.12));
+    }
+
+    .story-card {
+      padding: 1.8rem;
+    }
+
+    .story-card p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+    }
+
+    .story-points {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 1.2rem;
+    }
+
+    .point {
+      padding: 1rem;
+      border-radius: 18px;
+      background: var(--paper);
+      border: 1px solid rgba(8,31,63,0.06);
+    }
+
+    .point strong {
+      display: block;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+
+    .gallery-wrap {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1rem;
+    }
+
+    .gallery-card {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-main {
+      min-height: 420px;
+    }
+
+    .gallery-main figcaption,
+    .gallery-side figcaption {
+      position: absolute;
+      left: 1rem;
+      right: 1rem;
+      bottom: 1rem;
+      padding: 0.8rem 0.95rem;
+      border-radius: 18px;
+      color: var(--white);
+      background: linear-gradient(180deg, rgba(8,31,63,0.08), rgba(8,31,63,0.72));
+      backdrop-filter: blur(6px);
+      font-weight: 600;
+    }
+
+    .gallery-side {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .gallery-side .gallery-card {
+      min-height: 204px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .info-card {
+      padding: 1.4rem;
+    }
+
+    .info-card h3 {
+      margin: 0 0 0.55rem;
+      color: var(--navy);
+      font-size: 1.12rem;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .volunteer {
+      background:
+        linear-gradient(135deg, rgba(8,31,63,0.96), rgba(15,43,87,0.96)),
+        url("images/fleet.webp");
+      background-size: cover;
+      background-position: center;
+      color: var(--white);
+      border-radius: 34px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .volunteer-inner {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1rem;
+      padding: 2rem;
+    }
+
+    .volunteer h2 {
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+
+    .volunteer p {
+      color: rgba(255,255,255,0.86);
+      margin: 0 0 1rem;
+    }
+
+    .quote {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 24px;
+      padding: 1.25rem;
+      backdrop-filter: blur(10px);
+      align-self: center;
+    }
+
+    .quote strong {
+      display: block;
+      margin-bottom: 0.45rem;
+      font-size: 1rem;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .contact-box {
+      padding: 1.6rem;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      margin-top: 0;
+    }
+
+    .contact-photo {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      min-height: 100%;
+      position: relative;
+    }
+
+    .contact-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-badge {
+      position: absolute;
+      left: 1rem;
+      bottom: 1rem;
+      padding: 0.75rem 0.9rem;
+      border-radius: 18px;
+      color: var(--white);
+      background: rgba(8,31,63,0.72);
+      backdrop-filter: blur(8px);
+      font-weight: 700;
+    }
+
+    #email-wrap {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      align-items: center;
+      min-height: 52px;
+    }
+
+    .email-link {
+      font-weight: 800;
+      color: var(--navy);
+      word-break: break-word;
+    }
+
+    .copy-note {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-top: 0.7rem;
+    }
+
+    .site-footer {
+      padding: 1.6rem 0 2.4rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+      padding-top: 1.4rem;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 980px) {
+      .strip-grid,
+      .story,
+      .gallery-wrap,
+      .section-head,
+      .volunteer-inner,
+      .contact,
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .story-points {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 84vh;
+      }
+
+      h1 {
+        max-width: 11ch;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .site-header {
+        position: relative;
+        background: var(--navy);
+      }
+
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav {
+        gap: 0.5rem;
+      }
+
+      .hero {
+        min-height: auto;
+        background-position: center;
+      }
+
+      .hero-inner {
+        padding-top: 2.2rem;
+      }
+
+      .strip {
+        margin-top: 1.2rem;
+      }
+
+      section {
+        padding: 3.8rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="St George's Sailing Club CIC home">
+        <span class="brand-badge"><img src="images/crest.webp" alt="St George's Sailing Club crest" /></span>
+        <span>
+          St George's Sailing Club CIC
+          <small>Sailing at Bury Lake Young Mariners</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#helpers">Parent helpers</a>
+        <a href="FAQ.html">FAQ</a>
+        <a href="club-documents.html">Club documents</a>
+        <! -- OLD LINK <a href="https://www.sgsailing.org.uk/form.pdf">Application form</a> -->
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-inner">
+        <span class="eyebrow">Not-for-profit community sailing primarily for St George's pupils </span>
+        <h1>Adventure, friendship and fun on the water.</h1>
+        <p class="hero-copy">
+          St George's Sailing Club CIC promotes and facilitates recreational sailing and related water-based activities,
+          primarily for pupils of St George's School, Harpenden.
+          We sail at Bury Lake Young Mariners in a structured, supervised and community-led environment.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#contact">Register your interest</a>
+          <a class="button button-secondary" href="#gallery">See the club in action</a>
+        </div>
+        <div class="hero-panel">
+          <strong>What the club is here to do</strong>
+          <p>
+            We aim to support physical wellbeing, water safety skills, teamwork and personal development through sailing,
+            while providing access to equipment, safety support, social activities and a welcoming club community.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="strip">
+      <div class="container strip-grid">
+        <div class="strip-card">
+          <strong>Where we sail</strong>
+          <span>Bury Lake Young Mariners, Rickmansworth</span>
+        </div>
+        <div class="strip-card">
+          <strong>Who we are for</strong>
+          <span>Primarily for St George's School pupils </span>
+        </div>
+        <div class="strip-card">
+          <strong>How we operate</strong>
+          <span>As a self-managed, not-for-profit CIC with structured supervision and clear governance</span>
+        </div>
+        <div class="strip-card">
+          <strong>What we offer</strong>
+          <span>Weekly sailing, regattas, inter-club events and community gatherings</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">About the club</div>
+            <h2>A long-standing school sailing community, now carried forward through the CIC.</h2>
+          </div>
+          <p class="lead">
+            St George's Sailing Club CIC continues the activities of the long-established St George's School Sailing Club,
+            originally founded in 1989. Today, the club provides structured access to sailing in a supervised, family-friendly
+            and not-for-profit setting.
+          </p>
+        </div>
+
+        <div class="story">
+          <div class="crest-card">
+            <img src="images/crest.webp" alt="St George's Sailing Club CIC crest" />
+          </div>
+
+          <div class="story-card">
+            <p>
+              The club exists to promote and facilitate recreational sailing and related water-based activities, primarily for
+              pupils of St George's School, Harpenden.
+            </p>
+            <p>
+              We organise weekly term-time sailing sessions during the sailing season, alongside other sessions or events as agreed.
+              We also support sailors through informal peer-led and supervised development, and organise regattas, inter-club events
+              and occasional social gatherings connected with club life.
+            </p>
+
+            <div class="story-points">
+              <div class="point">
+                <strong>Structured access to sailing</strong>
+                Sailing is delivered in a supervised environment that promotes confidence, teamwork and enjoyment.
+              </div>
+              <div class="point">
+                <strong>Practical water skills</strong>
+                Sessions help young people build water safety awareness, seamanship and responsible participation afloat.
+              </div>
+              <div class="point">
+                <strong>Not-for-profit purpose</strong>
+                Any surplus is reinvested to support safe access, safety resources, reduced barriers to participation and venue access costs.
+              </div>
+              <div class="point">
+                <strong>Community-led governance</strong>
+                Membership, scheduling and administration are managed transparently to sustain the club for students and families.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">On the water</div>
+            <h2>Sailing at Bury Lake Young Mariners.</h2>
+          </div>
+          <p class="lead">
+            The club operates as a self-managed group at Bury Lake Young Mariners and follows venue operating procedures and safety requirements.
+            School students take priority for places, boats and volunteer capacity.
+          </p>
+        </div>
+
+        <div class="gallery-wrap">
+          <figure class="gallery-card gallery-main">
+            <img src="images/fleet.webp" alt="A fleet of sailing dinghies on the lake under dramatic skies" />
+            <figcaption>Weekly term-time sailing sessions during the season, with the wider fleet sharing the lake.</figcaption>
+          </figure>
+
+          <div class="gallery-side">
+            <figure class="gallery-card">
+              <img src="images/hero.webp" alt="Two young sailors rounding a buoy in dinghies" />
+              <figcaption>Young sailors developing confidence through practical time on the water.</figcaption>
+            </figure>
+            <figure class="gallery-card">
+              <img src="images/sun.webp" alt="Dinghies sailing on the lake in bright sun" />
+              <figcaption>Regattas, inter-club events and memorable days afloat are all part of club life.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="helpers">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Parent helpers</div>
+            <h2>Run by families, supported by volunteers and guided by safety.</h2>
+          </div>
+          <p class="lead">
+            Parent involvement is central to how the club works. Regular volunteers and Group Leaders help sessions run safely,
+            while occasional helpers can support practical tasks under supervision. The club distinguishes clearly between these roles to support both safeguarding and family involvement.
+          </p>
+        </div>
+
+        <div class="info-grid">
+          <article class="info-card">
+            <h3>Group Leaders</h3>
+            <p>Group Leaders oversee sessions and are responsible for planning and delivering sailing in line with club byelaws and venue operating procedures.</p>
+          </article>
+          <article class="info-card">
+            <h3>Safeguarding and training</h3>
+            <p>Adults helping regularly on Sundays should hold a DBS check and complete RYA Safe and Fun, or equivalent safeguarding training approved by the Directors.</p>
+          </article>
+          <article class="info-card">
+            <h3>Safe, sensible support</h3>
+            <p>Occasional helpers are welcome for practical support, but they remain under the supervision of a DBS-checked volunteer or Group Leader and are not left in sole supervision of junior sailors.</p>
+          </article>
+        </div>
+
+        <div class="volunteer" style="margin-top: 1.4rem;">
+          <div class="volunteer-inner">
+            <div>
+              <h2>Parent helpers are always welcome.</h2>
+              <p>
+                The club is strengthened by parents who help on shore, support younger sailors, assist with organisation,
+                or contribute to the friendly and inclusive atmosphere of the day. If you would like to get involved, we would be very pleased to hear from you.
+              </p>
+              <a class="button button-primary" href="#contact">Ask how you can help</a>
+            </div>
+
+            <div class="quote">
+              <strong>How sailing is delivered</strong>
+              The club does not run RYA-accredited training courses. Basic tuition may be provided informally to support safe participation,
+              and the Group Leader has authority to limit or cancel sailing where weather or conditions are unsuitable.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Get in touch</div>
+            <h2>Interested in joining, helping or finding out more?</h2>
+          </div>
+          <p class="lead">
+            Contact us if you would like to ask about sailing membership, junior participation, parent volunteering,
+            or upcoming sessions and events. Every person taking part in sailing activities must be admitted as a Sailing Member.
+          </p>
+        </div>
+
+        <div class="contact">
+          <div class="contact-box">
+            <p>
+              Click below to reveal the club email address. We’ve hidden it slightly to help cut down on spam.
+            </p>
+            <button class="button button-secondary-dark" id="reveal-email" type="button">Show contact email</button>
+            <div id="email-wrap" aria-live="polite"></div>
+            <div class="copy-note">You can then click to open your email app or copy the address to your clipboard.</div>
+			<p>We also stay in touch with our members via the Spond app.
+			</p>
+			<a class="button button-primary" href="spond.html">Find out more about Spond</a>
+          </div>
+
+          <div class="contact-photo">
+            <img src="images/sun.webp" alt="The fleet sailing in bright afternoon sun" />
+            <div class="photo-badge">St George's Sailing Club CIC</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> St George's Sailing Club Community Interest Company</div>
+      <div>Sailing at Bury Lake Young Mariners</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const revealButton = document.getElementById('reveal-email');
+    const emailWrap = document.getElementById('email-wrap');
+
+    revealButton.addEventListener('click', () => {
+      const user = ['contact'].join('');
+      const domain = ['sgsailing', 'org', 'uk'].join('.');
+      const email = `${user}@${domain}`;
+
+      emailWrap.innerHTML = `
+        <a class="email-link" href="mailto:${email}">${email}</a>
+        <button class="button button-secondary-dark" type="button" id="copy-email">Copy</button>
+        <span class="sr-only" id="copy-status" aria-live="polite"></span>
+      `;
+
+      revealButton.disabled = true;
+      revealButton.textContent = 'Email revealed';
+
+      const copyButton = document.getElementById('copy-email');
+      const copyStatus = document.getElementById('copy-status');
+
+      copyButton.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(email);
+          copyButton.textContent = 'Copied';
+          copyStatus.textContent = 'Email address copied to clipboard';
+        } catch (error) {
+          copyButton.textContent = 'Copy failed';
+          copyStatus.textContent = 'Copy failed';
+        }
+      }, { once: true });
+    }, { once: true });
+  </script>
+</body>
+</html>
