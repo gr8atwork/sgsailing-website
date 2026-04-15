@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ | St George's Sailing Club CIC</title>
+  <meta name="description" content="Frequently asked questions for St George's Sailing Club CIC." />
+  <style>
+    :root {
+      --navy: #081f3f;
+      --navy-soft: #0f2b57;
+      --blue: #2b67a7;
+      --red: #c62828;
+      --paper: #f6f8fb;
+      --white: #ffffff;
+      --text: #1a2633;
+      --muted: #5f6d7b;
+      --line: rgba(8, 31, 63, 0.12);
+      --shadow: 0 18px 48px rgba(8, 31, 63, 0.16);
+      --radius-lg: 30px;
+      --radius-md: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(223, 238, 255, 0.9), transparent 26%),
+        linear-gradient(180deg, #f7fbff 0%, #f3f6fa 100%);
+      line-height: 1.65;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: absolute;
+      inset: 0 0 auto 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.95rem;
+      color: var(--white);
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-badge {
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.24);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.16);
+      flex: 0 0 auto;
+    }
+
+    .brand-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand small {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .nav {
+      display: flex;
+      gap: 1rem;
+      color: rgba(255,255,255,0.92);
+      font-weight: 650;
+    }
+
+    .nav a {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav a:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 62vh;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(5, 15, 31, 0.18) 0%, rgba(5, 15, 31, 0.5) 48%, rgba(5, 15, 31, 0.84) 100%),
+        url("images/fleet.webp");
+      background-size: cover;
+      background-position: center center;
+      color: var(--white);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 160px;
+      background: linear-gradient(180deg, rgba(243,246,250,0), rgba(243,246,250,1));
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 8rem 0 4.5rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.16);
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 10ch;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      text-wrap: balance;
+    }
+
+    .hero-copy {
+      margin-top: 1.2rem;
+      max-width: 60ch;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .toc-wrap {
+      position: relative;
+      z-index: 2;
+      margin-top: -2rem;
+    }
+
+    .toc-card,
+    .faq-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .toc-card {
+      padding: 1.6rem;
+    }
+
+    .toc-head {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 1.4rem;
+    }
+
+    .section-kicker {
+      color: var(--red);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.82rem;
+      margin-bottom: 0.9rem;
+    }
+
+    h2 {
+      margin: 0 0 0.7rem;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.02;
+      color: var(--navy);
+      letter-spacing: -0.05em;
+      text-wrap: balance;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem 1rem;
+    }
+
+    .toc-link {
+      display: block;
+      padding: 0.95rem 1rem;
+      border-radius: 18px;
+      background: var(--paper);
+      border: 1px solid rgba(8,31,63,0.06);
+      color: var(--navy);
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .toc-link:hover {
+      transform: translateY(-1px);
+      background: #eef4fb;
+    }
+
+    section.faq-section {
+      padding: 4rem 0 5rem;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .faq-card {
+      padding: 1.4rem 1.5rem;
+    }
+
+    .faq-card h3 {
+      margin: 0 0 0.75rem;
+      color: var(--navy);
+      font-size: 1.22rem;
+      scroll-margin-top: 90px;
+    }
+
+    .faq-card p {
+      margin: 0 0 0.9rem;
+      color: var(--muted);
+    }
+
+    .faq-card p:last-of-type {
+      margin-bottom: 0.9rem;
+    }
+
+    .back-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .site-footer {
+      padding: 1.6rem 0 2.4rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+      padding-top: 1.4rem;
+    }
+
+    @media (max-width: 980px) {
+      .toc-head,
+      .toc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .site-header {
+        position: relative;
+        background: var(--navy);
+      }
+
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero { min-height: auto; }
+      .hero-inner { padding-top: 2.2rem; }
+      .toc-wrap { margin-top: 1.2rem; }
+      section.faq-section { padding: 3.8rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="St George's Sailing Club CIC home">
+        <span class="brand-badge"><img src="images/crest.webp" alt="St George's Sailing Club crest" /></span>
+        <span>
+          St George's Sailing Club CIC
+          <small>Sailing at Bury Lake Young Mariners</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-inner">
+        <span class="eyebrow">Frequently asked questions</span>
+        <h1>Club information at a glance.</h1>
+        <p class="hero-copy">
+          Answers to the most common questions about joining, sessions, fees, safety, clothing, communications and how the club works.
+        </p>
+      </div>
+    </section>
+
+    <div class="toc-wrap">
+      <div class="container">
+        <div class="toc-card">
+          <div class="toc-head">
+            <div>
+              <div class="section-kicker">Contents</div>
+              <h2>Questions</h2>
+            </div>
+            <p class="lead">Use the links below to jump directly to a question. Each answer includes a link back to the top of the page.</p>
+          </div>
+
+          <div class="toc-grid">
+            <a class="toc-link" href="#what-is-st-georges-sailing-club-cic">What is St George's Sailing Club CIC?</a>
+            <a class="toc-link" href="#who-can-join-the-club">Who can join the club?</a>
+            <a class="toc-link" href="#do-i-need-prior-sailing-experience">Do I need prior sailing experience?</a>
+            <a class="toc-link" href="#when-does-sailing-take-place">When does sailing take place?</a>
+            <a class="toc-link" href="#where-does-sailing-happen">Where does sailing happen?</a>
+            <a class="toc-link" href="#how-do-i-know-if-a-session-is-running">How do I know if a session is running?</a>
+            <a class="toc-link" href="#can-sessions-be-cancelled-or-changed">Can sessions be cancelled or changed?</a>
+            <a class="toc-link" href="#are-session-places-limited">Are session places limited?</a>
+            <a class="toc-link" href="#how-do-i-get-there">How do I get there?</a>
+            <a class="toc-link" href="#how-are-parents-kept-informed">How are parents kept informed?</a>
+            <a class="toc-link" href="#do-you-offer-trial-sessions">Do you offer trial sessions?</a>
+            <a class="toc-link" href="#how-much-does-membership-cost">How much does membership cost?</a>
+            <a class="toc-link" href="#how-do-i-sign-up">How do I sign up?</a>
+            <a class="toc-link" href="#how-do-i-pay-the-membership-fee">How do I pay the membership fee?</a>
+            <a class="toc-link" href="#do-parents-need-to-fill-in-a-form">Do parents need to fill in a form?</a>
+            <a class="toc-link" href="#do-you-need-volunteers">Do you need volunteers?</a>
+            <a class="toc-link" href="#what-kind-of-volunteer-help-is-useful">What kind of volunteer help is useful?</a>
+            <a class="toc-link" href="#do-regular-volunteers-need-dbs-or-safeguarding-training">Do regular volunteers need DBS or safeguarding training?</a>
+            <a class="toc-link" href="#can-occasional-helpers-still-help">Can occasional helpers still help?</a>
+            <a class="toc-link" href="#what-happens-at-a-first-session">What happens at a first session?</a>
+            <a class="toc-link" href="#what-shall-i-bring">What shall I bring?</a>
+            <a class="toc-link" href="#what-about-my-medication">What about my medication?</a>
+            <a class="toc-link" href="#what-shall-i-wear">What shall I wear?</a>
+            <a class="toc-link" href="#do-i-need-to-wear-a-buoyancy-aid">Do I need to wear a buoyancy aid?</a>
+            <a class="toc-link" href="#are-there-changing-rooms-and-showers">Are there changing rooms and showers?</a>
+            <a class="toc-link" href="#where-can-i-leave-my-belongings">Where can I leave my belongings?</a>
+            <a class="toc-link" href="#can-i-leave-my-child-and-go">Can I leave my child and go?</a>
+            <a class="toc-link" href="#can-my-child-leave-on-their-own-at-the-end">Can my child leave on their own at the end?</a>
+            <a class="toc-link" href="#what-sort-of-instruction-is-provided">What sort of instruction is provided?</a>
+            <a class="toc-link" href="#can-the-group-leader-stop-someone-from-sailing">Can the Group Leader stop someone from sailing?</a>
+            <a class="toc-link" href="#what-about-photographs-or-video">What about photographs or video?</a>
+            <a class="toc-link" href="#do-i-pay-if-i-miss-a-session">Do I pay if I miss a session?</a>
+            <a class="toc-link" href="#are-trial-session-fees-refundable">Are trial session fees refundable?</a>
+            <a class="toc-link" href="#can-adults-sail-too">Can adults sail too?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="faq-list">
+          <article class="faq-card">
+            <h3 id="what-is-st-georges-sailing-club-cic">What is St George's Sailing Club CIC?</h3>
+            <p>St George's Sailing Club (SGSC) was started over 35 years ago. It is run by parent volunteers. It was made into a Community Interest Company for operational reasons in 2026.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="who-can-join-the-club">Who can join the club?</h3>
+            <p>The club is primarily for students from St George's School. Siblings in Year 6 or above who can sail independently, ideally RYA Youth Level 2 or above, are also welcome. We ask parents and adults who are helping to join as volunteer members.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="do-i-need-prior-sailing-experience">Do I need prior sailing experience?</h3>
+            <p>No. St George's students do not need any prior sailing experience to join. Siblings in Year 6 or above from other schools are expected to be able to sail independently, ideally RYA Youth Level 2 or above.</p>
+            <p>Please note that this is a club, not a sailing school. We can provide initial tips, limited tuition and coaching to get you going, but we do not offer RYA Level courses as part of our usual activities. BLYM offers RYA courses in the school holidays, as does Stanborough Lake.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="when-does-sailing-take-place">When does sailing take place?</h3>
+            <p>Sailing usually runs on Sunday afternoons, from 1pm to 5pm, during the Summer Term and the first half of the Autumn Term.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="where-does-sailing-happen">Where does sailing happen?</h3>
+            <p>Sailing takes place at Bury Lake Young Mariners (BLYM), a watersports base at Rickmansworth Aquadrome.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="how-do-i-know-if-a-session-is-running">How do I know if a session is running?</h3>
+            <p>You will be asked to confirm attendance in advance each week. All updates, including cancellations or changes, are shared via the Spond app, so please download it and make sure notifications are switched on.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="can-sessions-be-cancelled-or-changed">Can sessions be cancelled or changed?</h3>
+            <p>Yes. Sailing arrangements may be changed, limited or cancelled depending on weather, safety conditions, volunteer availability or operational requirements at BLYM. Updates are shared through Spond.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="are-session-places-limited">Are session places limited?</h3>
+            <p>Yes. Session places may sometimes need to be limited in order to ensure safe operation in line with club procedures, available volunteers, safety cover, weather conditions and the equipment available on the day.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="how-do-i-get-there">How do I get there?</h3>
+            <p>Families must arrange their own transport, but lift sharing is often organised informally. The address is Rickmansworth Aquadrome, Frogmoor Lane, WD3 1NB. The what3words location is <strong>prone.closet.exam</strong>. The car park is free. It is about a 5-minute walk from the car park to the BLYM base. Leaving the car park on foot, turn left into the main park area in front of the café and walk up the path. The water will be on your right. Follow the path until you see the gates for the BLYM base, also on your right.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="how-are-parents-kept-informed">How are parents kept informed?</h3>
+            <p>We use Spond as our main communication platform for weekly sailing updates, session sign-up and practical information. Communication is with parents and guardians rather than directly with students. Parents may sometimes use Spond to arrange informal lift sharing between themselves, but these are private arrangements and are not organised or supervised by St George's Sailing Club CIC.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="do-you-offer-trial-sessions">Do you offer trial sessions?</h3>
+            <p>Yes, we offer up to 2 trial sessions. The cost is £15 per session, paid in advance, and includes a £3 temporary membership fee per session. If you join, this is deducted from the annual membership fee.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="how-much-does-membership-cost">How much does membership cost?</h3>
+            <p>Sailing members pay a £30 annual membership fee on joining. Each session attended is then £12. Session fees are invoiced at the end of each half term. You only pay for sessions you attend.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="how-do-i-sign-up">How do I sign up?</h3>
+            <p>Complete the application form found on the website. Email a scanned copy to contact@sgsailing.org.uk. Please also provide the paper copy by post, or bring it to your first session and give it to the Group Leader. Pay the £30 membership fee when returning the form.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="how-do-i-pay-the-membership-fee">How do I pay the membership fee?</h3>
+            <p>Bank transfer to:</p>
+            <p><strong>NatWest</strong><br>
+            <strong>St George's Sailing Club CIC</strong><br>
+            Sort code: <strong>60-00-08</strong><br>
+            Account number: <strong>49357565</strong><br>
+            Reference: <strong>Surname MEMBER</strong><br>
+            For example: <strong>Smith MEMBER</strong></p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="do-parents-need-to-fill-in-a-form">Do parents need to fill in a form?</h3>
+            <p>Yes. Any adult helping with sessions must complete a form for safety reasons. There is no membership fee for volunteers.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="do-you-need-volunteers">Do you need volunteers?</h3>
+            <p>Yes. The club relies heavily on volunteers. No sailing experience is required, although it is helpful if you have it. If you would like to help, please ensure you have also returned a completed membership form.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="what-kind-of-volunteer-help-is-useful">What kind of volunteer help is useful?</h3>
+            <p>Volunteer help may include assisting with rigging and launching, helping on shore, supporting younger sailors, helping the session run smoothly and contributing to the friendly atmosphere of the club. Some roles require more experience or specific approvals, but many practical tasks do not.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="do-regular-volunteers-need-dbs-or-safeguarding-training">Do regular volunteers need DBS or safeguarding training?</h3>
+            <p>Adults helping regularly on Sundays should normally hold a DBS check and complete RYA Safe and Fun, or equivalent safeguarding training approved by the Directors, in line with club procedures.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="can-occasional-helpers-still-help">Can occasional helpers still help?</h3>
+            <p>Yes. Occasional helpers are welcome for practical support, but they remain under the supervision of a DBS-checked volunteer or Group Leader and should not be left in sole supervision of junior sailors.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="what-happens-at-a-first-session">What happens at a first session?</h3>
+            <p>New sailors and families should arrive in good time, report to the Group Leader or the person coordinating the session, and make sure all required forms and payments have been completed. Trial sessions are designed to help new sailors settle in, understand how the club works and get safely onto the water.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="what-shall-i-bring">What shall I bring?</h3>
+            <p>You should bring a change of warm clothes and a towel in case you get wet. Appropriate changing facilities and showers are provided. Bring any snacks or lunch you would like during the break. Bring a debit card or similar if you think you might want to make a purchase from the galley, which sells hot drinks and limited snacks. The galley is card only, with no cash accepted. Bring any medication you might need, such as inhalers or epipens. Particularly in warm weather, bring a water bottle.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="what-about-my-medication">What about my medication?</h3>
+            <p>Please inform the Group Leader if you may need to take medication. You may need to keep it with you at all times if you need quick access to it in an emergency.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="what-shall-i-wear">What shall I wear?</h3>
+            <p>Wear weather-appropriate clothes that you do not mind getting wet or dirty. It can feel colder on the water than on land, so bring an extra jumper or warm layer. Do not wear jeans, as they are heavy and uncomfortable when wet. Bring sunscreen and a sunhat if it is hot. Footwear must cover the toes and have reasonable grip. Feet will get wet. Old trainers are perfect. Open-toed sandals and Crocs are not allowed. You will not be able to sail unless you have appropriate footwear. Wetsuits are available for hire if you prefer, or you are welcome to bring your own, but they are not normally compulsory. Occasionally conditions may dictate that a wetsuit is compulsory, and this will be provided at no additional charge.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="do-i-need-to-wear-a-buoyancy-aid">Do I need to wear a buoyancy aid?</h3>
+            <p>Yes. Buoyancy aids are provided at no extra charge. Any person walking on the water side of the compound, or participating in activities on the water, must wear a buoyancy aid. You will not be allowed to take part unless you are wearing one.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="are-there-changing-rooms-and-showers">Are there changing rooms and showers?</h3>
+            <p>Yes. Appropriate changing facilities and showers are available at BLYM.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="where-can-i-leave-my-belongings">Where can I leave my belongings?</h3>
+            <p>Please do not bring valuables if you can avoid it, as there are no locker facilities. Bags and spare clothes can be left at the base, but all personal belongings are brought at your own risk.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="can-i-leave-my-child-and-go">Can I leave my child and go?</h3>
+            <p>Children under 12 must be supervised by a parent or guardian throughout the session. For older children, parents should follow the club's arrangements for drop-off and collection and make sure the Group Leader knows who is responsible for the child on the day. Unless specific arrangements have been agreed, parents should not assume that the club is providing general childcare outside the sailing activity itself.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="can-my-child-leave-on-their-own-at-the-end">Can my child leave on their own at the end?</h3>
+            <p>Children should only leave at the end of the session in line with the arrangements agreed with parents and the Group Leader. If someone different is collecting your child, please make this clear in advance.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="what-sort-of-instruction-is-provided">What sort of instruction is provided?</h3>
+            <p>This is a club, not a sailing school. Sessions are supervised, and some informal tuition, tips and coaching may be provided to support safe participation, but the club does not usually provide formal RYA-accredited training courses as part of normal sessions.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="can-the-group-leader-stop-someone-from-sailing">Can the Group Leader stop someone from sailing?</h3>
+            <p>Yes. The Group Leader may decide that a person should not sail, or that a particular boat or activity should not be used, if this is necessary for safety, supervision, weather or operational reasons.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="what-about-photographs-or-video">What about photographs or video?</h3>
+            <p>Photographs or video may sometimes be taken during club activities, in line with the consent arrangements completed by families. These may be used for club-related purposes. If you have any questions about this, please contact the club.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="do-i-pay-if-i-miss-a-session">Do I pay if I miss a session?</h3>
+            <p>No. You only pay for sessions you attend. Session fees are invoiced at the end of each half term based on attendance.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="are-trial-session-fees-refundable">Are trial session fees refundable?</h3>
+            <p>Trial session fees are generally paid in advance. If a session is cancelled by the club, the fee would normally be carried forward or otherwise dealt with by the club. If you cannot attend, please let us know as early as possible.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+
+          <article class="faq-card">
+            <h3 id="can-adults-sail-too">Can adults sail too?</h3>
+            <p>Yes, adults may sail if they can do so independently and if conditions allow, at the discretion of the Group Leader on the day. Non-volunteering adults who wish to sail must pay the relevant adult membership and session fees. Adult sailing is also subject to suitable equipment being available, as priority is given to student sailors.</p>
+            <a class="back-top" href="#top">↑ Back to top</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> St George's Sailing Club Community Interest Company</div>
+      <div>Sailing at Bury Lake Young Mariners</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
